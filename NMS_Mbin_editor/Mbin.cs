@@ -88,7 +88,7 @@ namespace NMS_Mbin_editor
             foreach (FieldInfo entry in mbinStruct.GetType().GetFields())   // getType() then GetFields() from the type
                                                                             // don't get this at the moment really
             {
-                TreeNode treeNode = trv.Nodes[trv.Nodes.Count - 1].Nodes.Add(GetFieldType(entry) + ": "+ entry.Name);
+                TreeNode treeNode = trv.Nodes[trv.Nodes.Count - 1].Nodes.Add(entry.GetValue(mbinStruct).GetType() + ": "+ entry.Name);
                 dict_fieldFromNode.Add(treeNode, entry);
             }
             // any entry that is of type *.xml has children that make up that xml

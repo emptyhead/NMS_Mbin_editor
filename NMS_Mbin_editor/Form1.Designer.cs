@@ -56,11 +56,15 @@
             // 
             // trv_Mbins
             // 
+            this.trv_Mbins.AllowDrop = true;
             this.trv_Mbins.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trv_Mbins.Location = new System.Drawing.Point(3, 3);
             this.trv_Mbins.Name = "trv_Mbins";
             this.trv_Mbins.Size = new System.Drawing.Size(376, 346);
             this.trv_Mbins.TabIndex = 0;
+            this.trv_Mbins.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trv_Mbins_AfterSelect);
+            this.trv_Mbins.DragDrop += new System.Windows.Forms.DragEventHandler(this.trv_Mbins_DragDrop);
+            this.trv_Mbins.DragEnter += new System.Windows.Forms.DragEventHandler(this.trv_Mbins_DragEnter);
             // 
             // layout_upperRight
             // 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using libMBIN;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,11 +60,11 @@ namespace NMS_Mbin_editor
             // foreach loaded mbin: check if e.node>>field is in the loaded mbin
             // when we find the correct one - set it to the current mbin
 
-            if (!currentMbin.dict_fieldFromNode.ContainsKey(e.Node))
+            if (!currentMbin.dict_nodeToField.ContainsKey(e.Node))
             {
                 foreach (TreeNode treeNode in dict_loadedMbins.Keys)
                 {
-                    if (dict_loadedMbins[treeNode].dict_fieldFromNode.ContainsKey(e.Node))
+                    if (dict_loadedMbins[treeNode].dict_nodeToField.ContainsKey(e.Node))
                     {
                         currentMbin = dict_loadedMbins[treeNode];
                         
@@ -71,8 +72,8 @@ namespace NMS_Mbin_editor
                 }
             }
             lbl_MbinRelativePath.Text = currentMbin.mbinPath;
-            lbl_VarName.Text = currentMbin.GetFieldName(e.Node);
-            lbl_varType.Text = currentMbin.GetFieldType(e.Node).ToString();
+            lbl_VarName.Text = currentMbin.GetFieldName(currentMbin.GetAssociatedFieldFromNode(e.Node));
+            lbl_varType.Text = currentMbin.GetFieldType(currentMbin.GetAssociatedFieldFromNode(e.Node)).ToString();
         }
     }
 }

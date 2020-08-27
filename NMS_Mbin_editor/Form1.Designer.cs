@@ -71,8 +71,8 @@
             this.layout_upperRight.ColumnCount = 1;
             this.layout_upperRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layout_upperRight.Controls.Add(this.lbl_MbinRelativePath, 0, 0);
-            this.layout_upperRight.Controls.Add(this.lbl_VarName, 0, 1);
-            this.layout_upperRight.Controls.Add(this.lbl_varType, 0, 2);
+            this.layout_upperRight.Controls.Add(this.lbl_VarName, 0, 2);
+            this.layout_upperRight.Controls.Add(this.lbl_varType, 0, 1);
             this.layout_upperRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout_upperRight.Location = new System.Drawing.Point(385, 3);
             this.layout_upperRight.Name = "layout_upperRight";
@@ -98,7 +98,7 @@
             // 
             this.lbl_VarName.AutoSize = true;
             this.lbl_VarName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_VarName.Location = new System.Drawing.Point(3, 21);
+            this.lbl_VarName.Location = new System.Drawing.Point(3, 42);
             this.lbl_VarName.Name = "lbl_VarName";
             this.lbl_VarName.Size = new System.Drawing.Size(243, 21);
             this.lbl_VarName.TabIndex = 1;
@@ -108,7 +108,7 @@
             // 
             this.lbl_varType.AutoSize = true;
             this.lbl_varType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_varType.Location = new System.Drawing.Point(3, 42);
+            this.lbl_varType.Location = new System.Drawing.Point(3, 21);
             this.lbl_varType.Name = "lbl_varType";
             this.lbl_varType.Size = new System.Drawing.Size(243, 21);
             this.lbl_varType.TabIndex = 2;

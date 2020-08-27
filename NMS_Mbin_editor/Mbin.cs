@@ -19,7 +19,7 @@ namespace NMS_Mbin_editor
 
         public NMSTemplate mbinStruct;  // the file as a struct in memory
                                         // contains all the info for the various fields in the EXML
-        public Dictionary<TreeNode, FieldInfo> dict_fieldFromNode = new Dictionary<TreeNode, FieldInfo>();  // dictionary linking nodes to the fields in the struct
+        public Dictionary<TreeNode, FieldInfo> dict_nodeToField = new Dictionary<TreeNode, FieldInfo>();  // dictionary linking nodes to the fields in the struct
                                         // why? Use it to access the field when clicking on a node
                                         // don't think there's an easier way to do it
         public TreeNode rootNode;   // not sure why I want this anymore to be honest
@@ -36,44 +36,52 @@ namespace NMS_Mbin_editor
             return rootNode;
         }
 
-        public Type GetFieldType(TreeNode treeNode)
+        public FieldInfo GetAssociatedFieldFromNode(TreeNode treeNode)
         {
-            FieldInfo fi = dict_fieldFromNode[treeNode];
-
-            Type fieldType = mbinStruct.GetType();
-
-            if (fi != null)
-            {
-                fieldType = fi.GetValue(mbinStruct).GetType();
-
-            }
-            return fieldType;
+            FieldInfo fieldToReturn = dict_nodeToField[treeNode];
+            return fieldToReturn;
         }
 
-        public string GetFieldName (TreeNode treeNode)
+        public Type GetFieldType(FieldInfo fieldInfo)
         {
-            // node passed in
-            FieldInfo fi = dict_fieldFromNode[treeNode];
-
-            string fieldName = mbinPath;
-
-            if (fi != null)
+            Type typeToReturn = mbinStruct.GetType();
+            if (fieldInfo != null)
             {
-                fieldName = fi.Name;
+                typeToReturn = fieldInfo.GetValue(mbinStruct).GetType();
             }
-            return fieldName;
+            return typeToReturn;
+        }
+
+        public string GetFieldName (FieldInfo fieldInfo)
+        {
+            string fieldNameToReturn = "<NO FIELD INFO>";
+
+            if (fieldInfo != null)
+            {
+                fieldNameToReturn = fieldInfo.Name;
+            }
+            else
+            {
+                fieldNameToReturn = rootNode.Name;
+            }
+            
+            return fieldNameToReturn;
         }
 
         public string GetFieldValue (FieldInfo field)
         {
-            string fieldValue = field.GetValue(mbinStruct).ToString();
-            return fieldValue;
+            string fieldValueToReturn = "<NO FIELD INFO>";
+            if (field != null)
+            {
+                fieldValueToReturn = field.GetValue(mbinStruct).ToString();
+            }
+            return fieldValueToReturn;
         }
 
-        public void SetFieldValue (TreeNode treeNode, string value)
+        public void SetFieldValue (FieldInfo fieldInfo, string value)
         {
             // cast the string to the type of field
-            var valueToSet = Convert.ChangeType(value, GetFieldType(treeNode));
+            var valueToSet = Convert.ChangeType(value, GetFieldType(fieldInfo));
         }
 
         public void PutFieldsInTreeview (TreeView trv)
@@ -81,7 +89,7 @@ namespace NMS_Mbin_editor
             rootNode = new TreeNode(mbinPath);      // create the root node
                                                     // which is just the full path name
                                                     // should maybe be the relative path name
-            dict_fieldFromNode.Add(rootNode, null); // null cos it doesn't point to a field
+            dict_nodeToField.Add(rootNode, null); // null cos it doesn't point to a field
             trv.Nodes.Add(rootNode);                // add the node to the treeView passed in
             
             // run through all the entries
@@ -89,7 +97,7 @@ namespace NMS_Mbin_editor
                                                                             // don't get this at the moment really
             {
                 TreeNode treeNode = trv.Nodes[trv.Nodes.Count - 1].Nodes.Add(entry.GetValue(mbinStruct).GetType() + ": "+ entry.Name);
-                dict_fieldFromNode.Add(treeNode, entry);
+                dict_nodeToField.Add(treeNode, entry);
             }
             // any entry that is of type *.xml has children that make up that xml
             // these should maybe just be displayed in the editing bit

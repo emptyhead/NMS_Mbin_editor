@@ -34,6 +34,7 @@
             this.lbl_MbinRelativePath = new System.Windows.Forms.Label();
             this.lbl_VarName = new System.Windows.Forms.Label();
             this.lbl_varType = new System.Windows.Forms.Label();
+            this.txtB_values = new System.Windows.Forms.TextBox();
             this.layout_Main.SuspendLayout();
             this.layout_upperRight.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             this.layout_upperRight.Controls.Add(this.lbl_MbinRelativePath, 0, 0);
             this.layout_upperRight.Controls.Add(this.lbl_VarName, 0, 2);
             this.layout_upperRight.Controls.Add(this.lbl_varType, 0, 1);
+            this.layout_upperRight.Controls.Add(this.txtB_values, 0, 3);
             this.layout_upperRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout_upperRight.Location = new System.Drawing.Point(385, 3);
             this.layout_upperRight.Name = "layout_upperRight";
@@ -114,6 +116,15 @@
             this.lbl_varType.TabIndex = 2;
             this.lbl_varType.Text = "Variable Type";
             // 
+            // txtB_values
+            // 
+            this.txtB_values.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtB_values.Location = new System.Drawing.Point(3, 66);
+            this.txtB_values.Multiline = true;
+            this.txtB_values.Name = "txtB_values";
+            this.txtB_values.Size = new System.Drawing.Size(243, 277);
+            this.txtB_values.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,6 +148,7 @@
         private System.Windows.Forms.Label lbl_MbinRelativePath;
         private System.Windows.Forms.Label lbl_VarName;
         private System.Windows.Forms.Label lbl_varType;
+        private System.Windows.Forms.TextBox txtB_values;
     }
 }
 

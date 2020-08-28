@@ -46,6 +46,12 @@ namespace NMS_Mbin_editor
             templateVars = baseTemplate.GetType().GetFields();
         }
 
+        public string GetRelativePath(string fullPath)
+        {
+            string returnString = fullPath.Remove(0, Form1.unpackedNMSFilePath.Length);
+            return returnString;
+        }
+
         public void PopulateTreeView (TreeView trv)
         {
             // get the name of the template (eg. GcPlayerGlobals) and use it as rootNode

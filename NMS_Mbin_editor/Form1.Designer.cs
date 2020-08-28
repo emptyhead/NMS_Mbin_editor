@@ -35,6 +35,7 @@
             this.lbl_VarName = new System.Windows.Forms.Label();
             this.lbl_varType = new System.Windows.Forms.Label();
             this.txtB_values = new System.Windows.Forms.TextBox();
+            this.lbl_libMBINType = new System.Windows.Forms.Label();
             this.layout_Main.SuspendLayout();
             this.layout_upperRight.SuspendLayout();
             this.SuspendLayout();
@@ -72,17 +73,19 @@
             this.layout_upperRight.ColumnCount = 1;
             this.layout_upperRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layout_upperRight.Controls.Add(this.lbl_MbinRelativePath, 0, 0);
-            this.layout_upperRight.Controls.Add(this.lbl_VarName, 0, 2);
-            this.layout_upperRight.Controls.Add(this.lbl_varType, 0, 1);
-            this.layout_upperRight.Controls.Add(this.txtB_values, 0, 3);
+            this.layout_upperRight.Controls.Add(this.txtB_values, 0, 4);
+            this.layout_upperRight.Controls.Add(this.lbl_VarName, 0, 3);
+            this.layout_upperRight.Controls.Add(this.lbl_varType, 0, 2);
+            this.layout_upperRight.Controls.Add(this.lbl_libMBINType, 0, 1);
             this.layout_upperRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout_upperRight.Location = new System.Drawing.Point(385, 3);
             this.layout_upperRight.Name = "layout_upperRight";
-            this.layout_upperRight.RowCount = 4;
-            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.082982F));
-            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.082982F));
-            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.082982F));
-            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.75105F));
+            this.layout_upperRight.RowCount = 5;
+            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layout_upperRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 218F));
             this.layout_upperRight.Size = new System.Drawing.Size(249, 346);
             this.layout_upperRight.TabIndex = 1;
             // 
@@ -92,38 +95,44 @@
             this.lbl_MbinRelativePath.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_MbinRelativePath.Location = new System.Drawing.Point(3, 0);
             this.lbl_MbinRelativePath.Name = "lbl_MbinRelativePath";
-            this.lbl_MbinRelativePath.Size = new System.Drawing.Size(243, 21);
+            this.lbl_MbinRelativePath.Size = new System.Drawing.Size(243, 20);
             this.lbl_MbinRelativePath.TabIndex = 0;
             this.lbl_MbinRelativePath.Text = "MBIN Relative Path";
             // 
             // lbl_VarName
             // 
             this.lbl_VarName.AutoSize = true;
-            this.lbl_VarName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_VarName.Location = new System.Drawing.Point(3, 42);
+            this.lbl_VarName.Location = new System.Drawing.Point(3, 60);
             this.lbl_VarName.Name = "lbl_VarName";
-            this.lbl_VarName.Size = new System.Drawing.Size(243, 21);
+            this.lbl_VarName.Size = new System.Drawing.Size(76, 13);
             this.lbl_VarName.TabIndex = 1;
             this.lbl_VarName.Text = "Variable Name";
             // 
             // lbl_varType
             // 
             this.lbl_varType.AutoSize = true;
-            this.lbl_varType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_varType.Location = new System.Drawing.Point(3, 21);
+            this.lbl_varType.Location = new System.Drawing.Point(3, 40);
             this.lbl_varType.Name = "lbl_varType";
-            this.lbl_varType.Size = new System.Drawing.Size(243, 21);
+            this.lbl_varType.Size = new System.Drawing.Size(72, 13);
             this.lbl_varType.TabIndex = 2;
             this.lbl_varType.Text = "Variable Type";
             // 
             // txtB_values
             // 
-            this.txtB_values.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtB_values.Location = new System.Drawing.Point(3, 66);
+            this.txtB_values.Location = new System.Drawing.Point(3, 83);
             this.txtB_values.Multiline = true;
             this.txtB_values.Name = "txtB_values";
-            this.txtB_values.Size = new System.Drawing.Size(243, 277);
+            this.txtB_values.Size = new System.Drawing.Size(243, 118);
             this.txtB_values.TabIndex = 3;
+            // 
+            // lbl_libMBINType
+            // 
+            this.lbl_libMBINType.AutoSize = true;
+            this.lbl_libMBINType.Location = new System.Drawing.Point(3, 20);
+            this.lbl_libMBINType.Name = "lbl_libMBINType";
+            this.lbl_libMBINType.Size = new System.Drawing.Size(71, 13);
+            this.lbl_libMBINType.TabIndex = 4;
+            this.lbl_libMBINType.Text = "libMBIN Type";
             // 
             // Form1
             // 
@@ -149,6 +158,7 @@
         private System.Windows.Forms.Label lbl_VarName;
         private System.Windows.Forms.Label lbl_varType;
         private System.Windows.Forms.TextBox txtB_values;
+        private System.Windows.Forms.Label lbl_libMBINType;
     }
 }
 

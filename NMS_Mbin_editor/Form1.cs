@@ -19,6 +19,8 @@ namespace NMS_Mbin_editor
         // Need a list of all the Templates loaded into the form
         List<ExtendedNmsTemplate> loadedTemplates = new List<ExtendedNmsTemplate>();
 
+        public static string unpackedNMSFilePath = @"D:\nmsModding\unpacked";
+
         //Dictionary<TreeNode, Mbin> dict_loadedMbins = new Dictionary<TreeNode, Mbin>();
 
         public Form1()
@@ -89,14 +91,20 @@ namespace NMS_Mbin_editor
             }
 
             // update the information labels
-            lbl_MbinRelativePath.Text = currentTemplate.mbinPath;
+            lbl_libMBINType.Text = "<NO INFO>";
+            lbl_MbinRelativePath.Text = "<NO INFO>";
+            lbl_VarName.Text = "<NO INFO>";
+            lbl_varType.Text = "<NO INFO>";
+
+            lbl_MbinRelativePath.Text = currentTemplate.GetRelativePath(currentTemplate.mbinPath);
+
             if(selectedNode.isRootNode)
             {
-                lbl_VarName.Text = selectedNode.associatedTemplate.baseTemplate.GetType().ToString();
-                lbl_varType.Text = selectedNode.associatedTemplate.baseTemplate.GetType().ToString();
+                lbl_libMBINType.Text = selectedNode.associatedTemplate.baseTemplate.GetType().ToString();
             }
             else
             {
+                lbl_libMBINType.Text = selectedNode.associatedTemplate.baseTemplate.GetType().ToString();
                 lbl_VarName.Text = selectedNode.fieldInfo.Name;
                 lbl_varType.Text = selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).GetType().ToString();
                 
@@ -106,7 +114,10 @@ namespace NMS_Mbin_editor
                 if(selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).GetType().IsArray)
                 {
                     string messageText = "";
-                    Array array = (Array)selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate);
+                    Array array = (Array)selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate); // getting the values from the array
+
+                    // try to use getAttribute
+                    
 
                     foreach(var arrayItem in array)
                     {

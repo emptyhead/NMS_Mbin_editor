@@ -1,4 +1,5 @@
 ﻿using libMBIN;
+using libMBIN.NMS.GameComponents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -117,9 +118,38 @@ namespace NMS_Mbin_editor
                     Array array = (Array)selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate); // getting the values from the array
 
                     // try to use getAttribute
+                    // get property info
                     
 
-                    foreach(var arrayItem in array)
+                    Console.WriteLine("Value of node>>field is: "+selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate));
+                    Console.WriteLine("Name of fieldInfo is: "+ selectedNode.fieldInfo.Name);
+                    Console.WriteLine("Reflected type is: "+selectedNode.fieldInfo.ReflectedType);
+                    
+                    Console.WriteLine("Just NMSAttribute[] i think: " + selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name).GetCustomAttributes(typeof(NMSAttribute), false));
+                    NMSAttribute[] nmsAttributes = (NMSAttribute[])selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name).GetCustomAttributes(typeof(NMSAttribute),false);
+
+                    Console.WriteLine("Length of array: "+nmsAttributes.Length);
+                    
+                    
+                    if (nmsAttributes.Length>0)
+                    {
+                        Console.WriteLine("NMSAttributes.Size: " + nmsAttributes[0].Size);
+                        Console.WriteLine("NMSAttributes.Alignment: " + nmsAttributes[0].Alignment);
+                        Console.WriteLine("NMSAttributes.Broken: " + nmsAttributes[0].Broken);
+                        Console.WriteLine("NMSAttributes.DefaultValue: " + nmsAttributes[0].DefaultValue);
+                        Console.WriteLine("NMSAttributes.EnumType: " + nmsAttributes[0].EnumType);
+                        //Console.WriteLine(nmsAttributes[0].EnumValue);
+                        Console.WriteLine("NMSAttributes.GUID: " + nmsAttributes[0].GUID);
+                        Console.WriteLine("NMSAttributes.IDFIeld: " + nmsAttributes[0].IDField);
+                        Console.WriteLine("NMSAttributes.Ignore: " + nmsAttributes[0].Ignore);
+                        Console.WriteLine("NMSAttributes.NAmeHash: " + nmsAttributes[0].NameHash);
+                        Console.WriteLine("NMSAttributes.Padding: " + nmsAttributes[0].Padding);
+                        Console.WriteLine("NMSAttributes.TypeID: " + nmsAttributes[0].TypeId);
+
+                    }
+                    
+
+                    foreach (var arrayItem in array)
                     {
                         messageText += array.Length + " " + arrayItem + "\r\n";
                     }

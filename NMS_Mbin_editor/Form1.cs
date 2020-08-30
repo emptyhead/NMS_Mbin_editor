@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -119,19 +120,20 @@ namespace NMS_Mbin_editor
 
                     // try to use getAttribute
                     // get property info
-                    
+
+                    FieldInfo reflectedField = selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name);
 
                     Console.WriteLine("Value of node>>field is: "+selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate));
                     Console.WriteLine("Name of fieldInfo is: "+ selectedNode.fieldInfo.Name);
                     Console.WriteLine("Reflected type is: "+selectedNode.fieldInfo.ReflectedType);
                     
                     Console.WriteLine("Just NMSAttribute[] i think: " + selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name).GetCustomAttributes(typeof(NMSAttribute), false));
-                    NMSAttribute[] nmsAttributes = (NMSAttribute[])selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name).GetCustomAttributes(typeof(NMSAttribute),false);
+                    NMSAttribute[] nmsAttributes = (NMSAttribute[])reflectedField.GetCustomAttributes(typeof(NMSAttribute),false);
 
                     Console.WriteLine("Length of array: "+nmsAttributes.Length);
-                    
-                    
-                    if (nmsAttributes.Length>0)
+
+
+                    /*if (true)
                     {
                         Console.WriteLine("NMSAttributes.Size: " + nmsAttributes[0].Size);
                         Console.WriteLine("NMSAttributes.Alignment: " + nmsAttributes[0].Alignment);
@@ -146,14 +148,27 @@ namespace NMS_Mbin_editor
                         Console.WriteLine("NMSAttributes.Padding: " + nmsAttributes[0].Padding);
                         Console.WriteLine("NMSAttributes.TypeID: " + nmsAttributes[0].TypeId);
 
+                    }*/
+
+                    Array enumValues;
+
+                    if (nmsAttributes[0].EnumType != null)
+                    {
+                        enumValues = nmsAttributes[0].EnumType.GetEnumValues();
+                        for (int i=0; i<enumValues.Length; i++)
+                        {
+                            messageText += enumValues.GetValue(i).ToString() + ": " + array.GetValue(i) + "\r\n";
+                            Console.WriteLine("Index " + i + ": " + enumValues.GetValue(i));
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < array.Length; i++)
+                        {
+                            messageText += "Index [" + i.ToString() +"] : " + array.GetValue(i) + "\r\n";
+                        }
                     }
                     
-
-                    foreach (var arrayItem in array)
-                    {
-                        messageText += array.Length + " " + arrayItem + "\r\n";
-                    }
-
                     txtB_values.Text = messageText;
                 }
                 else

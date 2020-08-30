@@ -34,15 +34,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.grpB_properties = new System.Windows.Forms.GroupBox();
-            this.lbl_MbinRelativePath = new System.Windows.Forms.Label();
-            this.lbl_varType = new System.Windows.Forms.Label();
-            this.lbl_VarName = new System.Windows.Forms.Label();
-            this.lbl_libMBINType = new System.Windows.Forms.Label();
-            this.txtB_values = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lbl_libMBINType = new System.Windows.Forms.Label();
+            this.lbl_MbinRelativePath = new System.Windows.Forms.Label();
+            this.lbl_VarName = new System.Windows.Forms.Label();
+            this.lbl_varType = new System.Windows.Forms.Label();
+            this.txtB_values = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,7 +71,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(752, 491);
-            this.splitContainer1.SplitterDistance = 353;
+            this.splitContainer1.SplitterDistance = 416;
             this.splitContainer1.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -88,7 +88,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(351, 489);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(414, 489);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // trv_Mbins
@@ -99,7 +99,7 @@
             this.trv_Mbins.ForeColor = System.Drawing.Color.White;
             this.trv_Mbins.Location = new System.Drawing.Point(11, 11);
             this.trv_Mbins.Name = "trv_Mbins";
-            this.trv_Mbins.Size = new System.Drawing.Size(329, 467);
+            this.trv_Mbins.Size = new System.Drawing.Size(392, 467);
             this.trv_Mbins.TabIndex = 0;
             this.trv_Mbins.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trv_Mbins_AfterSelect);
             this.trv_Mbins.DragDrop += new System.Windows.Forms.DragEventHandler(this.trv_Mbins_DragDrop);
@@ -121,11 +121,12 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 133F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(393, 489);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(330, 489);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // splitContainer2
             // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(11, 11);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -139,8 +140,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.lbl_MbinRelativePath);
             this.splitContainer2.Panel2.Controls.Add(this.lbl_VarName);
             this.splitContainer2.Panel2.Controls.Add(this.lbl_varType);
-            this.splitContainer2.Size = new System.Drawing.Size(328, 103);
-            this.splitContainer2.SplitterDistance = 109;
+            this.splitContainer2.Size = new System.Drawing.Size(308, 127);
+            this.splitContainer2.SplitterDistance = 111;
             this.splitContainer2.TabIndex = 5;
             // 
             // grpB_properties
@@ -152,54 +153,10 @@
             this.grpB_properties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpB_properties.Location = new System.Drawing.Point(0, 0);
             this.grpB_properties.Name = "grpB_properties";
-            this.grpB_properties.Size = new System.Drawing.Size(109, 103);
+            this.grpB_properties.Size = new System.Drawing.Size(111, 127);
             this.grpB_properties.TabIndex = 0;
             this.grpB_properties.TabStop = false;
             this.grpB_properties.Text = "Properties";
-            // 
-            // lbl_MbinRelativePath
-            // 
-            this.lbl_MbinRelativePath.AutoSize = true;
-            this.lbl_MbinRelativePath.Location = new System.Drawing.Point(2, 38);
-            this.lbl_MbinRelativePath.Name = "lbl_MbinRelativePath";
-            this.lbl_MbinRelativePath.Size = new System.Drawing.Size(101, 13);
-            this.lbl_MbinRelativePath.TabIndex = 0;
-            this.lbl_MbinRelativePath.Text = "MBIN Relative Path";
-            // 
-            // lbl_varType
-            // 
-            this.lbl_varType.AutoSize = true;
-            this.lbl_varType.Location = new System.Drawing.Point(2, 83);
-            this.lbl_varType.Name = "lbl_varType";
-            this.lbl_varType.Size = new System.Drawing.Size(72, 13);
-            this.lbl_varType.TabIndex = 2;
-            this.lbl_varType.Text = "Variable Type";
-            // 
-            // lbl_VarName
-            // 
-            this.lbl_VarName.AutoSize = true;
-            this.lbl_VarName.Location = new System.Drawing.Point(2, 60);
-            this.lbl_VarName.Name = "lbl_VarName";
-            this.lbl_VarName.Size = new System.Drawing.Size(76, 13);
-            this.lbl_VarName.TabIndex = 1;
-            this.lbl_VarName.Text = "Variable Name";
-            // 
-            // lbl_libMBINType
-            // 
-            this.lbl_libMBINType.AutoSize = true;
-            this.lbl_libMBINType.Location = new System.Drawing.Point(2, 16);
-            this.lbl_libMBINType.Name = "lbl_libMBINType";
-            this.lbl_libMBINType.Size = new System.Drawing.Size(71, 13);
-            this.lbl_libMBINType.TabIndex = 4;
-            this.lbl_libMBINType.Text = "libMBIN Type";
-            // 
-            // txtB_values
-            // 
-            this.txtB_values.Location = new System.Drawing.Point(11, 144);
-            this.txtB_values.Multiline = true;
-            this.txtB_values.Name = "txtB_values";
-            this.txtB_values.Size = new System.Drawing.Size(328, 334);
-            this.txtB_values.TabIndex = 4;
             // 
             // label1
             // 
@@ -236,6 +193,51 @@
             this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "Variable Type";
+            // 
+            // lbl_libMBINType
+            // 
+            this.lbl_libMBINType.AutoSize = true;
+            this.lbl_libMBINType.Location = new System.Drawing.Point(2, 16);
+            this.lbl_libMBINType.Name = "lbl_libMBINType";
+            this.lbl_libMBINType.Size = new System.Drawing.Size(71, 13);
+            this.lbl_libMBINType.TabIndex = 4;
+            this.lbl_libMBINType.Text = "libMBIN Type";
+            // 
+            // lbl_MbinRelativePath
+            // 
+            this.lbl_MbinRelativePath.AutoSize = true;
+            this.lbl_MbinRelativePath.Location = new System.Drawing.Point(2, 38);
+            this.lbl_MbinRelativePath.Name = "lbl_MbinRelativePath";
+            this.lbl_MbinRelativePath.Size = new System.Drawing.Size(101, 13);
+            this.lbl_MbinRelativePath.TabIndex = 0;
+            this.lbl_MbinRelativePath.Text = "MBIN Relative Path";
+            // 
+            // lbl_VarName
+            // 
+            this.lbl_VarName.AutoSize = true;
+            this.lbl_VarName.Location = new System.Drawing.Point(2, 60);
+            this.lbl_VarName.Name = "lbl_VarName";
+            this.lbl_VarName.Size = new System.Drawing.Size(76, 13);
+            this.lbl_VarName.TabIndex = 1;
+            this.lbl_VarName.Text = "Variable Name";
+            // 
+            // lbl_varType
+            // 
+            this.lbl_varType.AutoSize = true;
+            this.lbl_varType.Location = new System.Drawing.Point(2, 83);
+            this.lbl_varType.Name = "lbl_varType";
+            this.lbl_varType.Size = new System.Drawing.Size(72, 13);
+            this.lbl_varType.TabIndex = 2;
+            this.lbl_varType.Text = "Variable Type";
+            // 
+            // txtB_values
+            // 
+            this.txtB_values.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtB_values.Location = new System.Drawing.Point(11, 144);
+            this.txtB_values.Multiline = true;
+            this.txtB_values.Name = "txtB_values";
+            this.txtB_values.Size = new System.Drawing.Size(308, 334);
+            this.txtB_values.TabIndex = 4;
             // 
             // Form1
             // 

@@ -126,13 +126,14 @@
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Left;
             this.splitContainer2.Location = new System.Drawing.Point(11, 11);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.grpB_properties);
+            this.splitContainer2.Panel1MinSize = 100;
             // 
             // splitContainer2.Panel2
             // 
@@ -141,7 +142,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.lbl_VarName);
             this.splitContainer2.Panel2.Controls.Add(this.lbl_varType);
             this.splitContainer2.Size = new System.Drawing.Size(308, 127);
-            this.splitContainer2.SplitterDistance = 111;
+            this.splitContainer2.SplitterDistance = 110;
             this.splitContainer2.TabIndex = 5;
             // 
             // grpB_properties
@@ -153,7 +154,7 @@
             this.grpB_properties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpB_properties.Location = new System.Drawing.Point(0, 0);
             this.grpB_properties.Name = "grpB_properties";
-            this.grpB_properties.Size = new System.Drawing.Size(111, 127);
+            this.grpB_properties.Size = new System.Drawing.Size(110, 127);
             this.grpB_properties.TabIndex = 0;
             this.grpB_properties.TabStop = false;
             this.grpB_properties.Text = "Properties";

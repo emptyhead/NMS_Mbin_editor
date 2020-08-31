@@ -30,6 +30,13 @@ namespace NMS_Mbin_editor
             InitializeComponent();
         }
 
+        /*
+         * Deals with file being dropped into TreeView
+         * gets the filepath as a string
+         * sets the active MBIN to the dropped file
+         * asks the current MBIN to populate the TreeView with it's data
+         * adds itself to the list of loadedTemplates
+         */
         private void trv_Mbins_DragDrop(object sender, DragEventArgs e)
         {
             string[] droppedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -43,6 +50,11 @@ namespace NMS_Mbin_editor
             loadedTemplates.Add(currentTemplate);
         }
 
+        /*
+         * Set up dragEnter being allowed
+         * Don't understand why this needs to specifically be set
+         * but it does
+         */
         private void trv_Mbins_DragEnter(object sender, DragEventArgs e)
         {
             // need to check that the data being dragged is of a format we want
@@ -60,30 +72,23 @@ namespace NMS_Mbin_editor
             }
         }
 
+        /*
+         * After selecting a Node
+         * Check if it's in the currentTemplate, if not change currentTemplate to match correct MBIN
+         * Display information about the node:
+         *      it's path
+         *      if it's a root node
+         *      if it's an array
+         *          if it is an array does it use an enum
+         *              if it does get those values and display them
+         *              
+         * Yea, in all honesty this method should be broken down into
+         * separate ones. It does too much.
+         */
         private void trv_Mbins_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // compare if the selected node>>field is in the current mbin
-            // if not then go through each loaded mbin
-            // foreach loaded mbin: check if e.node>>field is in the loaded mbin
-            // when we find the correct one - set it to the current mbin
-
+            // just an easily named shortcut to the node from the event
             MyTreeNode selectedNode = (MyTreeNode)e.Node;
-
-            string messageString = "";
-
-            if (selectedNode.isRootNode)
-            {
-                messageString += "This is an NMSTemplate of type: " + selectedNode.associatedTemplate.baseTemplate.GetType() +
-                    "\nIt's path is: " + selectedNode.associatedTemplate.mbinPath;
-            }
-            else if (!selectedNode.isRootNode)
-            {
-                messageString += "This node is just a field which points to: " + selectedNode.fieldInfo +
-                    "\nIt is part of the NMSTemplate: " + selectedNode.associatedTemplate.baseTemplate.GetType() +
-                    "\nWhich is on your PC here: " + selectedNode.associatedTemplate.mbinPath;
-            }
-
-            //MessageBox.Show(messageString);
 
             // if selected node associated template isn't the current template
             // then set current template to be the selected one
@@ -92,46 +97,52 @@ namespace NMS_Mbin_editor
                 currentTemplate = selectedNode.associatedTemplate;
             }
 
-            // update the information labels
+            // Blank the information labels
             lbl_libMBINType.Text = "<NO INFO>";
             lbl_MbinRelativePath.Text = "<NO INFO>";
             lbl_VarName.Text = "<NO INFO>";
             lbl_varType.Text = "<NO INFO>";
 
+            // MBIN RELATIVE PATH
             lbl_MbinRelativePath.Text = currentTemplate.GetRelativePath(currentTemplate.mbinPath);
 
-            if(selectedNode.isRootNode)
+            // WHAT STRUCT IS THIS FROM?
+            lbl_libMBINType.Text = selectedNode.associatedTemplate.baseTemplate.GetType().Name;
+
+            // If this isn't a root node
+            // then we've got some other information to show and process
+            if (!selectedNode.isRootNode)
             {
-                lbl_libMBINType.Text = selectedNode.associatedTemplate.baseTemplate.GetType().ToString();
-            }
-            else
-            {
-                lbl_libMBINType.Text = selectedNode.associatedTemplate.baseTemplate.GetType().ToString();
+                // VAR NAME
                 lbl_VarName.Text = selectedNode.fieldInfo.Name;
-                lbl_varType.Text = selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).GetType().ToString();
-                
-                // the following branch works to display values, but...
-                // some arrays have names and values and using this method just shows a bunch of numbers
-                // they're arrays because they don't declare themselves as internal xml structs such as colours.xml
-                if(selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).GetType().IsArray)
+                // VAR TYPE (SINGLE, BOOL, LIBMBIN STRUCT, ARRAY)
+                lbl_varType.Text = selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).GetType().Name;
+
+                // If the var is an array then we need to process and display it in different ways
+                if (selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).GetType().IsArray)
                 {
-                    string messageText = "";
-                    Array array = (Array)selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate); // getting the values from the array
+                    string messageText = "";    // Do i need to use this??
 
-                    // try to use getAttribute
-                    // get property info
+                    // Firstly get the array
+                    Array array = (Array)selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate);
 
-                    FieldInfo reflectedField = selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name);
+                    // Was doing some crazy shit before when I was confused. Left it here to ponder my madness in future
+                    //FieldInfo reflectedField = selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name);
 
-                    Console.WriteLine("Value of node>>field is: "+selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate));
-                    Console.WriteLine("Name of fieldInfo is: "+ selectedNode.fieldInfo.Name);
-                    Console.WriteLine("Reflected type is: "+selectedNode.fieldInfo.ReflectedType);
-                    
-                    Console.WriteLine("Just NMSAttribute[] i think: " + selectedNode.fieldInfo.ReflectedType.GetField(selectedNode.fieldInfo.Name).GetCustomAttributes(typeof(NMSAttribute), false));
-                    NMSAttribute[] nmsAttributes = (NMSAttribute[])reflectedField.GetCustomAttributes(typeof(NMSAttribute),false);
+                    // Shortcut to the field we're interested in. Just to not have to type the whole thing each time
+                    FieldInfo field = selectedNode.fieldInfo;
 
-                    Console.WriteLine("Length of array: "+nmsAttributes.Length);
+                    // Testing/Debug info to find out how things work
+                    Console.WriteLine("Value of node>>field is: " + field.GetValue(currentTemplate.baseTemplate));
+                    Console.WriteLine("Name of fieldInfo is: " + field.Name);
+                    Console.WriteLine("Reflected type is: " + field.ReflectedType);
+                    Console.WriteLine("Just NMSAttribute[] i think: " + field.GetCustomAttributes(typeof(NMSAttribute), false));
 
+                    // Get attributes from the field
+                    // returns a zero length array if there is none
+                    NMSAttribute[] nmsAttributes = (NMSAttribute[])field.GetCustomAttributes(typeof(NMSAttribute), false);
+
+                    Console.WriteLine("Length of array: " + nmsAttributes.Length);
 
                     /*if (true)
                     {
@@ -150,50 +161,47 @@ namespace NMS_Mbin_editor
 
                     }*/
 
+                    // temp Array var to store values from an Enum
                     Array enumValues;
 
+                    // Check if the attribute has an EnumType
+                    // if it does then we want to use it for this field
                     if (nmsAttributes[0].EnumType != null)
                     {
+                        // it has an associated enum type so let's add that
+                        // to the Var Type info box
+                        lbl_varType.Text += " using:\r\n" + nmsAttributes[0].EnumType.Name;
+
+                        // Get the values used in the EnumType
+                        // and store them in that array from before (enumValues)
                         enumValues = nmsAttributes[0].EnumType.GetEnumValues();
-                        for (int i=0; i<enumValues.Length; i++)
+
+                        // Loop through each enum showing the name associated with the number
+                        // and then the value from the array itself
+                        for (int i = 0; i < enumValues.Length; i++)
                         {
                             messageText += enumValues.GetValue(i).ToString() + ": " + array.GetValue(i) + "\r\n";
-                            Console.WriteLine("Index " + i + ": " + enumValues.GetValue(i));
+                            //Console.WriteLine("Index " + i + ": " + enumValues.GetValue(i));
                         }
                     }
+                    // if it doesn't have an EnumType
+                    // then it's just a list of indices (0...n)
                     else
                     {
                         for (int i = 0; i < array.Length; i++)
                         {
-                            messageText += "Index [" + i.ToString() +"] : " + array.GetValue(i) + "\r\n";
+                            messageText += "Index [" + i.ToString() + "] : " + array.GetValue(i) + "\r\n";
                         }
                     }
-                    
+
                     txtB_values.Text = messageText;
                 }
+                // If it isn't an array then just display the value
                 else
                 {
                     txtB_values.Text = selectedNode.fieldInfo.GetValue(currentTemplate.baseTemplate).ToString();
                 }
-                
             }
-
-            /*
-            if (!currentTemplate.dict_nodeToField.ContainsKey(e.Node))
-            {
-                foreach (TreeNode treeNode in dict_loadedMbins.Keys)
-                {
-                    if (dict_loadedMbins[treeNode].dict_nodeToField.ContainsKey(e.Node))
-                    {
-                        currentTemplate = dict_loadedMbins[treeNode];
-                        
-                    }
-                }
-            }
-            lbl_MbinRelativePath.Text = currentTemplate.mbinPath;
-            lbl_VarName.Text = currentTemplate.GetFieldName(currentTemplate.GetAssociatedFieldFromNode(e.Node));
-            lbl_varType.Text = currentTemplate.GetFieldType(currentTemplate.GetAssociatedFieldFromNode(e.Node)).ToString();
-            */
         }
     }
 }
